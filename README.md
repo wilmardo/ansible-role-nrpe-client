@@ -1,3 +1,9 @@
+# TODO
+- [ ] Fix compilation issues [Github issue](https://github.com/NagiosEnterprises/nrpe/issues/93)
+- [ ] Update links to Github instead of Sourceforge
+- [ ] Add LXC testing
+- [ ] Add my standard os'es to testing
+
 # Ansible Role: NRPE Client
 
 [![Build Status](https://travis-ci.org/networklore/ansible-role-nrpe-client.svg?branch=master)](https://travis-ci.org/networklore/ansible-role-nrpe-client)
