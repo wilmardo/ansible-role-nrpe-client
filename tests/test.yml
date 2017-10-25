@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: all
+  become: yes
   roles:
-    - ansible-role-nrpe-client
+    - {role: "{{ lookup('env', 'TRAVIS_REPO_SLUG') | basename }}" } #Gets only the repository name
