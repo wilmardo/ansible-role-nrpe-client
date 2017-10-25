@@ -1,8 +1,8 @@
 # TODO
 - [ ] Fix compilation issues [Github issue](https://github.com/NagiosEnterprises/nrpe/issues/93)
 - [ ] Update links to Github instead of Sourceforge
-- [ ] Add LXC testing
-- [ ] Add my standard os'es to testing
+- [x] Add LXC testing
+- [x] Add my standard os'es to testing
 
 # Ansible Role: NRPE Client
 
