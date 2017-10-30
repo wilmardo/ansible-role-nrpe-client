@@ -5,8 +5,9 @@ download_dir: "{{ ansible_env.HOME }}/nrpe"
 
 # This NRPE package is only used for the plugin, as the nrpe plugin on some distributions
 # require the distributions Nagios package to be installed.
-nrpeurl: http://sourceforge.net/projects/nagios/files/nrpe-2.x/nrpe-2.15/nrpe-2.15.tar.gz
-nrpesrc: nrpe-2.15
+nrpe_version: 3.2.1
+nrpeurl: "https://github.com/NagiosEnterprises/nrpe/archive/nrpe-{{ nrpe_version }}.tar.gz"
+nrpesrc: "nrpe-{{ nrpe_version }}"
 
 # Location of monitoring plugins
 plugins_dir: /usr/local/nagios/libexec
