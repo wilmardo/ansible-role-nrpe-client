@@ -23,7 +23,7 @@
 - name: Unpack Nagios source files
   unarchive:
     src: "{{ download_dir }}/{{ nrpesrc }}.tar.gz"
-    dest: "{{ download_dir }}/{{ nrpesrc }}"
+    dest: "{{ download_dir }}/"
     remote_src: yes
 
 - name: Configure NRPE
