@@ -16,6 +16,7 @@
     dest: "{{ download_dir }}/"
     remote_src: yes
 
+# See https://github.com/NagiosEnterprises/nrpe/issues/93
 - name: Configure NRPE
   shell: ./configure --with-ssl=/usr/bin/openssl --with-ssl-lib=/usr/lib/x86_64-linux-gnu --with-need-dh=no
   args:
@@ -23,9 +24,8 @@
     creates: "{{ download_dir }}/{{ nrpesrc }}/Makefile"
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
-# See https://github.com/NagiosEnterprises/nrpe/issues/93
 - name: Configure NRPE
-  shell: ./configure --with-ssl=/usr/bin/openssl --with-ssl-lib=/usr/lib/x86_64-linux-gnu --with-need-dh=no
+  shell: ./configure --with-ssl=/usr/bin/openssl --with-ssl-lib=/usr/lib/x86_64-linux-gnu
   args:
     chdir: "{{ download_dir }}/{{ nrpesrc }}"
     creates: "{{ download_dir }}/{{ nrpesrc }}/Makefile"
