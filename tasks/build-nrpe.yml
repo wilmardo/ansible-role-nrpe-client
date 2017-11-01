@@ -1,0 +1,55 @@
+---
+
+- name: Ensure download directory is present
+  file:
+    path: "{{ download_dir }}"
+    state: directory
+
+- name: Get NRPE
+  get_url:
+    url: "{{ nrpeurl }}"
+    dest: "{{ download_dir }}/{{ nrpesrc }}.tar.gz"
+
+- name: Unpack Nagios source files
+  unarchive:
+    src: "{{ download_dir }}/{{ nrpesrc }}.tar.gz"
+    dest: "{{ download_dir }}/"
+    remote_src: yes
+
+- name: Configure NRPE
+  shell: ./configure --with-ssl=/usr/bin/openssl --with-ssl-lib=/usr/lib/x86_64-linux-gnu --with-need-dh=no
+  args:
+    chdir: "{{ download_dir }}/{{ nrpesrc }}"
+    creates: "{{ download_dir }}/{{ nrpesrc }}/Makefile"
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+# See https://github.com/NagiosEnterprises/nrpe/issues/93
+- name: Configure NRPE
+  shell: ./configure --with-ssl=/usr/bin/openssl --with-ssl-lib=/usr/lib/x86_64-linux-gnu --with-need-dh=no
+  args:
+    chdir: "{{ download_dir }}/{{ nrpesrc }}"
+    creates: "{{ download_dir }}/{{ nrpesrc }}/Makefile"
+  when: ansible_distribution != "CentOS" and ansible_distribution_major_version != "7"
+
+- name: Make NRPE
+  shell: make all
+  args:
+    chdir: "{{ download_dir }}/{{ nrpesrc }}"
+    creates: "{{ download_dir }}/{{ nrpesrc }}/src/check_nrpe"
+  notify: restart nrpe
+
+- name: Ensure plugins directory is present
+  file:
+    path: "{{ plugins_dir }}"
+    state: directory
+
+- name: Copy check_nrpe
+  copy:
+    src: "{{ download_dir }}/{{ nrpesrc }}/src/check_nrpe"
+    dest: "{{ plugins_dir }}/check_nrpe"
+    remote_src: yes
+
+- name: Ensure NRPE is enabled on boot
+  service:
+    name: nrpe
+    enabled: yes

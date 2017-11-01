@@ -1,0 +1,7 @@
+---
+
+- name: Install NRPE prerequisites
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ nrpe_prerequisites }}"

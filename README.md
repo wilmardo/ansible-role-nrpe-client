@@ -1,5 +1,5 @@
 # TODO
-- [ ] Fix compilation issues [Github issue](https://github.com/NagiosEnterprises/nrpe/issues/93)
+- [x] Fix compilation issues [Github issue](https://github.com/NagiosEnterprises/nrpe/issues/93)
 - [x] Update links to Github instead of Sourceforge
 - [x] Add LXC testing
 - [x] Add my standard os'es to testing
