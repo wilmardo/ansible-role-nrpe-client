@@ -39,7 +39,7 @@
 
 - name: Update /etc/services file
   blockinfile:
-    path: /etc/services
+    dest: /etc/services
     block: |
       # Nagios services
       nrpe    5666/tcp
