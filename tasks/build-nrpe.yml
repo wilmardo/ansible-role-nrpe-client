@@ -10,7 +10,7 @@
     url: "{{ nrpeurl }}"
     dest: "{{ download_dir }}/{{ nrpesrc }}.tar.gz"
 
-- name: Unpack Nagios source files
+- name: Unpack NRPE source files
   unarchive:
     src: "{{ download_dir }}/{{ nrpesrc }}.tar.gz"
     dest: "{{ download_dir }}/"
@@ -18,18 +18,18 @@
 
 # See https://github.com/NagiosEnterprises/nrpe/issues/93
 - name: Configure NRPE
-  shell: ./configure --with-ssl=/usr/bin/openssl --with-ssl-lib=/usr/lib/x86_64-linux-gnu --with-need-dh=no
+  shell: ./configure --enable-command-args --with-need-dh=no
   args:
     chdir: "{{ download_dir }}/{{ nrpesrc }}"
     creates: "{{ download_dir }}/{{ nrpesrc }}/Makefile"
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
 - name: Configure NRPE
-  shell: ./configure --with-ssl=/usr/bin/openssl --with-ssl-lib=/usr/lib/x86_64-linux-gnu
+  shell: ./configure  --enable-command-args
   args:
     chdir: "{{ download_dir }}/{{ nrpesrc }}"
     creates: "{{ download_dir }}/{{ nrpesrc }}/Makefile"
-  when: ansible_distribution != "CentOS" and ansible_distribution_major_version != "7"
+  when: ansible_distribution != "CentOS" or ansible_distribution_major_version == "6"
 
 - name: Make NRPE
   shell: make all
@@ -64,17 +64,22 @@
 
 - name: Reload Systemd
   systemd:
+    name: nrpe
     daemon_reload: yes
   when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7") or
         (ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int >= 15) or
         (ansible_distribution == "Debian" and ansible_distribution_major_version|int >= 8)
 
-- name: Reload Upstart
-  shell: initctl reload-configuration
+- name: Reload SysVinit
+  command: update-rc.d nrpe defaults
   changed_when: False
-  when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6") or
-        (ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 15) or
-        (ansible_distribution == "Debian" and ansible_distribution_major_version|int < 8)
+  when: ansible_distribution == "Debian" and ansible_distribution_major_version|int < 8
+
+- name: Reload Upstart
+  command: initctl reload-configuration
+  changed_when: False
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 15
+
 
 - name: Enable NRPE on boot
   service:

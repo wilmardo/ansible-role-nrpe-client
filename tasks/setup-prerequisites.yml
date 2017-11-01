@@ -1,7 +1,17 @@
 ---
 
-- name: Install NRPE prerequisites
-  package:
+- name: Install NRPE prerequisites with apt
+  apt:
     name: "{{ item }}"
     state: present
+    update_cache: yes
   with_items: "{{ nrpe_prerequisites }}"
+  when: ansible_os_family == "Debian"
+
+- name: Install NRPE prerequisites with yum
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: "{{ nrpe_prerequisites }}"
+  when: ansible_os_family == "RedHat"
