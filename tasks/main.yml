@@ -26,6 +26,10 @@
     dest: "{{ download_dir }}/"
     remote_src: yes
 
+- name: Wait untill unpacked
+  wait_for:
+    path: "{{ download_dir }}/{{ nrpesrc }}"
+
 - name: Configure NRPE
   shell: ./configure --with-ssl=/usr/bin/openssl --with-ssl-lib=/usr/lib/x86_64-linux-gnu
   args:
