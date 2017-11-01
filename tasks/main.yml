@@ -1,8 +1,7 @@
 ---
 # tasks file for nagios
 
-- name: Include OS-specific variables.
-  include_vars: "{{ ansible_os_family }}-family.yml"
+- include: load-variables.yml
 
 - include: setup-prerequisites.yml
 

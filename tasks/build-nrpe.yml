@@ -48,6 +48,7 @@
   shell: make install-init
   args:
     chdir: "{{ download_dir }}/{{ nrpesrc }}"
+    creates: "{{ nrpe_init }}"
   notify: restart nrpe
 
 - name: Ensure plugins directory is present
