@@ -1,2 +1,2 @@
 ---
-nrpe_init: /etc/init.d/nagios # Init
+nrpe_init: /etc/init/nagios # Init

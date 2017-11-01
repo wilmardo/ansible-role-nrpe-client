@@ -8,10 +8,20 @@
   with_items: "{{ nrpe_prerequisites }}"
   when: ansible_os_family == "Debian"
 
-- name: Install NRPE prerequisites with yum
-  yum:
-    name: "{{ item }}"
-    state: present
-    update_cache: yes
-  with_items: "{{ nrpe_prerequisites }}"
+- block:
+
+  - name: Install NRPE prerequisites with yum
+    yum:
+      name: "{{ item }}"
+      state: present
+      update_cache: yes
+    with_items: "{{ nrpe_prerequisites }}"
+
+  - name: Install Ansible prerequisites for RHEL
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - libselinux-python
+
   when: ansible_os_family == "RedHat"
