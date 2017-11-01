@@ -62,12 +62,19 @@
     dest: "{{ plugins_dir }}/check_nrpe"
     remote_src: yes
 
-- name: Enable NRPE on boot
+- name: Reload Systemd
   systemd:
     daemon_reload: yes
   when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7") or
         (ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int >= 15) or
         (ansible_distribution == "Debian" and ansible_distribution_major_version|int >= 8)
+
+- name: Reload Upstart
+  shell: initctl reload-configuration
+  changed_when: False
+  when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6") or
+        (ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 15) or
+        (ansible_distribution == "Debian" and ansible_distribution_major_version|int < 8)
 
 - name: Enable NRPE on boot
   service:

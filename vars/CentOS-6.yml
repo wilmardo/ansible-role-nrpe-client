@@ -1,2 +1,2 @@
 ---
-nrpe_init: /etc/init.d/nagios # Init.d
+nrpe_init: /etc/init.d/nagios # Upstart
