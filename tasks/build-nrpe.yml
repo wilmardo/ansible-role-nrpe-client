@@ -18,21 +18,21 @@
 
 # See https://github.com/NagiosEnterprises/nrpe/issues/93
 - name: Configure NRPE
-  shell: ./configure --enable-command-args --with-need-dh=no
+  command: ./configure --enable-command-args --with-need-dh=no
   args:
     chdir: "{{ download_dir }}/{{ nrpesrc }}"
     creates: "{{ download_dir }}/{{ nrpesrc }}/Makefile"
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
 - name: Configure NRPE
-  shell: ./configure  --enable-command-args
+  command: ./configure  --enable-command-args
   args:
     chdir: "{{ download_dir }}/{{ nrpesrc }}"
     creates: "{{ download_dir }}/{{ nrpesrc }}/Makefile"
   when: ansible_distribution != "CentOS" or ansible_distribution_major_version == "6"
 
 - name: Make NRPE
-  shell: make all
+  command: make all
   args:
     chdir: "{{ download_dir }}/{{ nrpesrc }}"
     creates: "{{ download_dir }}/{{ nrpesrc }}/src/check_nrpe"
@@ -45,7 +45,7 @@
       nrpe    5666/tcp
 
 - name: Make service
-  shell: make install-init
+  command: make install-init
   args:
     chdir: "{{ download_dir }}/{{ nrpesrc }}"
     creates: "{{ nrpe_init }}"
@@ -80,8 +80,8 @@
   changed_when: False
   when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 15
 
-
 - name: Enable NRPE on boot
   service:
     name: nrpe
+    state: started
     enabled: yes
