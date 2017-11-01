@@ -36,7 +36,6 @@
   args:
     chdir: "{{ download_dir }}/{{ nrpesrc }}"
     creates: "{{ download_dir }}/{{ nrpesrc }}/src/check_nrpe"
-  notify: restart nrpe
 
 - name: Ensure plugins directory is present
   file:
@@ -48,8 +47,3 @@
     src: "{{ download_dir }}/{{ nrpesrc }}/src/check_nrpe"
     dest: "{{ plugins_dir }}/check_nrpe"
     remote_src: yes
-
-- name: Ensure NRPE is enabled on boot
-  service:
-    name: nrpe
-    enabled: yes
