@@ -26,15 +26,6 @@
     dest: "{{ download_dir }}/"
     remote_src: yes
 
-- shell: ls -l
-  args:
-    chdir: "{{ download_dir }}"
-  register: result
-
-- debug:
-    var: result
-    verbosity: 2
-
 - name: Configure NRPE
   shell: ./configure --with-ssl=/usr/bin/openssl --with-ssl-lib=/usr/lib/x86_64-linux-gnu
   args:
