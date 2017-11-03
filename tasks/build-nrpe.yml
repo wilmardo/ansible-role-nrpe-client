@@ -17,11 +17,19 @@
     remote_src: yes
 
 # See https://github.com/NagiosEnterprises/nrpe/issues/93
-- name: Configure NRPE
-  command: ./configure --enable-command-args --with-need-dh=no
-  args:
-    chdir: "{{ download_dir }}/{{ nrpesrc }}"
-    creates: "{{ download_dir }}/{{ nrpesrc }}/Makefile"
+- block:
+  - name: Configure NRPE
+    command: ./configure --enable-command-args --with-need-dh=no --enable-ssl
+    args:
+      chdir: "{{ download_dir }}/{{ nrpesrc }}"
+      creates: "{{ download_dir }}/{{ nrpesrc }}/Makefile"
+
+  - name: Generate DH params
+    shell: openssl dhparam -C 2048 > include/dh.h
+    args:
+      chdir: "{{ download_dir }}/{{ nrpesrc }}"
+      creates: "{{ download_dir }}/{{ nrpesrc }}/include/dh.h"
+
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
 - name: Configure NRPE
