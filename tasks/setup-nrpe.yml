@@ -10,4 +10,4 @@
   lineinfile:
     dest: /usr/local/nagios/etc/nrpe.cfg
     regexp: '^dont_blame='
-    line: "dont_blame={{ nrpe_dont_blame }}"
+    line: "dont_blame={{ nrpe_dont_blame_nrpe }}"

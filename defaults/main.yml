@@ -1,18 +1,26 @@
 ---
 
-# Directory that will be used as the location for the download
-download_dir: "{{ ansible_env.HOME }}/nrpe"
-
-# This NRPE package is only used for the plugin, as the nrpe plugin on some distributions
-# require the distributions Nagios package to be installed.
-nrpe_version: 3.2.1
-nrpeurl: "https://github.com/NagiosEnterprises/nrpe/archive/nrpe-{{ nrpe_version }}.tar.gz"
-nrpesrc: "nrpe-nrpe-{{ nrpe_version }}"
-
-# User which daemon runs as
-nrpe_user: nagios
-nrpe_group: nagios
-
+# Sets the hosts allowed to connect to NRPE
 nrpe_allowed_hosts:
   - 127.0.0.1
-nrpe_dont_blame: 0
+
+# The directory where the downloaded files will be placed and extracted.
+download_dir: "{{ ansible_env.HOME }}/nrpe"
+
+# The version of NRPE to be installed
+nrpe_version: 3.2.1
+
+# The NRPE download url
+nrpeurl: "https://github.com/NagiosEnterprises/nrpe/archive/nrpe-{{ nrpe_version }}.tar.gz"
+
+# The name of the untarred NRPE directory
+nrpesrc: "nrpe-nrpe-{{ nrpe_version }}"
+
+# The user which the NRPE daemon runs as
+nrpe_user: nagios
+
+# The group which the NRPE daemon runs as
+nrpe_group: nagios
+
+# Determines if the NRPE daemon will allow clients to specify arguments to commands that are executed. Change to 1 to enable
+nrpe_dont_blame_nrpe: 0

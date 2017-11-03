@@ -1,63 +1,72 @@
-# TODO
-- [x] Fix compilation issues [Github issue](https://github.com/NagiosEnterprises/nrpe/issues/93)
-- [x] Update links to Github instead of Sourceforge
-- [x] Add LXC testing
-- [x] Add my standard os'es to testing
+# wilmardo.nrpe-client
+=========
 
-# Ansible Role: NRPE Client
+[![Build Status](https://travis-ci.org/wilmardo/ansible-role-nrpe-client.svg?branch=master)](https://travis-ci.org/wilmardo/ansible-role-nrpe-client)
+[![Galaxy](http://img.shields.io/badge/galaxy-wilmardo.nrpe-client-blue.svg)](https://galaxy.ansible.com/wilmardo/nrpe-client/)
 
-[![Build Status](https://travis-ci.org/networklore/ansible-role-nrpe-client.svg?branch=master)](https://travis-ci.org/networklore/ansible-role-nrpe-client)
+This role installs the NRPE client on a monitoring server. You can use this role as an addon to the [wilmardo/nagios](https://galaxy.ansible.com/wilmardo/nagios/) role.
 
-This role installs the NRPE client on a monitoring server. You can use this role as an addon to the `networklore/nagios`role.
-
-
-# Requirements
+## Requirements
 
 None.
 
+## Role Variables
 
-# Role Variables
+### Default usage
 
-The variables you can configure are listed below. For the default settings you can look in `defaults/main.yml`.
+For default usage of this role you only need to define the following:
+```yaml
+    # Sets the hosts allowed to connect to NRPE
+    nrpe_allowed_hosts:
+      - 127.0.0.1
+```
 
-    download_dir: /home/user/download/nrpe
+### Advance usage
 
-This is the directory where the downloaded files will be placed and extracted.
+For more advanced usage the following variables are available:
+```yaml
+    # The directory where the downloaded files will be placed and extracted.
+    download_dir: "{{ ansible_env.HOME }}/nrpe"
+    
+    # The version of NRPE to be installed
+    nrpe_version: 3.2.1
+    
+    # The NRPE download url
+    nrpeurl: "https://github.com/NagiosEnterprises/nrpe/archive/nrpe-{{ nrpe_version }}.tar.gz"
+    
+    # The name of the untarred NRPE directory
+    nrpesrc: "nrpe-nrpe-{{ nrpe_version }}"
+    
+    # The user which the NRPE daemon runs as
+    nrpe_user: nagios
+    
+    # The group which the NRPE daemon runs as
+    nrpe_group: nagios
+    
+    # Determines if the NRPE daemon will allow clients to specify arguments to commands that are executed. Change to 1 to enable
+    nrpe_dont_blame_nrpe: 0
+```
 
-    nrpeurl: http://sourceforge.net/projects/nagios/files/nrpe-2.x/nrpe-2.15/nrpe-2.15.tar.gz
-    nrpesrc: nrpe-2.15
+## Dependencies
 
-The download url for NRPE along with the directory name which will be created when the source file is
-decompressed to. I.e. with `tar -xzvf nrpe-2.15.tar.gz`
+This role doesn't have any strict dependencies but can be used with [wilmardo/nagios](https://galaxy.ansible.com/wilmardo/nagios/).
 
-    plugins_dir: /usr/local/nagios/libexec
-
-The location of where you want to place the check_nrpe file, usually where your other monitoring plugins are located.
-
-# Dependencies
-
-This role doesn't have any strict dependencies but can be used with `networklore/nagios`.
-
-# Example Playbook
+## Example Playbook
 
 Install NRPE to your current monitoring plugin directory.
-
+```yaml
     - hosts: monitoring-servers
       vars_files:
        - vars/main.yml    
       roles:
-         - { role: networklore.nrpe-client }
+         - { role: wilmardo.nrpe-client }
+```
 
-*Contents of vars/main.yml*:
+## License
 
-    plugins_dir: /usr/lib64/nagios/plugins
+BSD-3-Clause-Clear
 
-License
--------
+## Author Information
 
-BSD
-
-Author Information
-------------------
-
-This role was created in 2016 by [Patrick Ogenstad](https://networklore.com).
+This role was originally created by [Patrick Ogenstad](http://networklore.com).
+Forked in 2017 by [Wilmar den Ouden](https://wilmardenouden.nl).
