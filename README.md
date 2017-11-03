@@ -1,8 +1,7 @@
 # wilmardo.nrpe-client
-=========
 
 [![Build Status](https://travis-ci.org/wilmardo/ansible-role-nrpe-client.svg?branch=master)](https://travis-ci.org/wilmardo/ansible-role-nrpe-client)
-[![Galaxy](http://img.shields.io/badge/galaxy-wilmardo.nrpe-client-blue.svg)](https://galaxy.ansible.com/wilmardo/nrpe-client/)
+[![Galaxy](https://img.shields.io/badge/galaxy-wilmardo.nrpe--client-blue.svg)](https://galaxy.ansible.com/wilmardo/nrpe-client/)
 
 This role installs the NRPE client on a monitoring server. You can use this role as an addon to the [wilmardo/nagios](https://galaxy.ansible.com/wilmardo/nagios/) role.
 
