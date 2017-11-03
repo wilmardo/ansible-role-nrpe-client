@@ -83,5 +83,4 @@
 - name: Enable NRPE on boot
   service:
     name: nrpe
-    state: started
     enabled: yes
