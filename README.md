@@ -52,13 +52,12 @@ This role doesn't have any strict dependencies but can be used with [wilmardo/na
 
 ## Example Playbook
 
-Install NRPE to your current monitoring plugin directory.
+Install NRPE and setup the allowed_hosts.
+It is better to move the `nrpe_allowed_hosts` to host_vars of your project but this will work.
 ```yaml
 - hosts: monitoring-servers
-  vars_files:
-   - vars/main.yml    
   roles:
-     - { role: wilmardo.nrpe-client }
+     - { role: wilmardo.nrpe-client, nrpe_allowed_hosts [ 127.0.0.1, 192.168.1.100 ] }
 ```
 
 ## License
