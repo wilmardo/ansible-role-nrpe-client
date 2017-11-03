@@ -43,6 +43,12 @@
     chdir: "{{ download_dir }}/{{ nrpesrc }}"
     creates: /usr/local/nagios/libexec/check_nrpe
 
+- name: Make install-config
+  command: make install-config
+  args:
+    chdir: "{{ download_dir }}/{{ nrpesrc }}"
+    creates: /usr/local/nagios/etc/nrpe.cfg
+
 - name: Update /etc/services file
   blockinfile:
     dest: /etc/services
