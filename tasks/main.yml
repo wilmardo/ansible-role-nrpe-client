@@ -8,3 +8,5 @@
 - include: setup-users.yml
 
 - include: build-nrpe.yml
+
+- include: setup-nrpe.yml

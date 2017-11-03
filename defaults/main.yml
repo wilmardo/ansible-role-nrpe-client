@@ -12,3 +12,8 @@ nrpesrc: "nrpe-nrpe-{{ nrpe_version }}"
 # User which daemon runs as
 nrpe_user: nagios
 nrpe_group: nagios
+
+nrpe_allowed_hosts:
+  - 127.0.0.1
+  - 10.1.1.1
+nrpe_dont_blame: 0
