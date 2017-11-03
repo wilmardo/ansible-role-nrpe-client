@@ -16,35 +16,35 @@ None.
 
 For default usage of this role you only need to define the following:
 ```yaml
-    # Sets the hosts allowed to connect to NRPE
-    nrpe_allowed_hosts:
-      - 127.0.0.1
+# Sets the hosts allowed to connect to NRPE
+nrpe_allowed_hosts:
+  - 127.0.0.1
 ```
 
 ### Advance usage
 
 For more advanced usage the following variables are available:
 ```yaml
-    # The directory where the downloaded files will be placed and extracted.
-    download_dir: "{{ ansible_env.HOME }}/nrpe"
-    
-    # The version of NRPE to be installed
-    nrpe_version: 3.2.1
-    
-    # The NRPE download url
-    nrpeurl: "https://github.com/NagiosEnterprises/nrpe/archive/nrpe-{{ nrpe_version }}.tar.gz"
-    
-    # The name of the untarred NRPE directory
-    nrpesrc: "nrpe-nrpe-{{ nrpe_version }}"
-    
-    # The user which the NRPE daemon runs as
-    nrpe_user: nagios
-    
-    # The group which the NRPE daemon runs as
-    nrpe_group: nagios
-    
-    # Determines if the NRPE daemon will allow clients to specify arguments to commands that are executed. Change to 1 to enable
-    nrpe_dont_blame_nrpe: 0
+# The directory where the downloaded files will be placed and extracted.
+download_dir: "{{ ansible_env.HOME }}/nrpe"
+
+# The version of NRPE to be installed
+nrpe_version: 3.2.1
+
+# The NRPE download url
+nrpeurl: "https://github.com/NagiosEnterprises/nrpe/archive/nrpe-{{ nrpe_version }}.tar.gz"
+
+# The name of the untarred NRPE directory
+nrpesrc: "nrpe-nrpe-{{ nrpe_version }}"
+
+# The user which the NRPE daemon runs as
+nrpe_user: nagios
+
+# The group which the NRPE daemon runs as
+nrpe_group: nagios
+
+# Determines if the NRPE daemon will allow clients to specify arguments to commands that are executed. Change to 1 to enable
+nrpe_dont_blame_nrpe: 0
 ```
 
 ## Dependencies
@@ -55,11 +55,11 @@ This role doesn't have any strict dependencies but can be used with [wilmardo/na
 
 Install NRPE to your current monitoring plugin directory.
 ```yaml
-    - hosts: monitoring-servers
-      vars_files:
-       - vars/main.yml    
-      roles:
-         - { role: wilmardo.nrpe-client }
+- hosts: monitoring-servers
+  vars_files:
+   - vars/main.yml    
+  roles:
+     - { role: wilmardo.nrpe-client }
 ```
 
 ## License
