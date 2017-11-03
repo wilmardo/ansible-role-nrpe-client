@@ -20,7 +20,7 @@ nrpe_allowed_hosts:
   - 127.0.0.1
 ```
 
-### Advance usage
+### Advanced usage
 
 For more advanced usage the following variables are available:
 ```yaml
