@@ -35,7 +35,13 @@
   command: make all
   args:
     chdir: "{{ download_dir }}/{{ nrpesrc }}"
-    creates: "{{ download_dir }}/{{ nrpesrc }}/src/check_nrpe"
+    creates: "{{ download_dir }}/{{ nrpesrc }}/src/nrpe"
+
+- name: Make install
+  command: make install
+  args:
+    chdir: "{{ download_dir }}/{{ nrpesrc }}"
+    creates: /usr/local/nagios/libexec/check_nrpe
 
 - name: Update /etc/services file
   blockinfile:
@@ -50,17 +56,6 @@
     chdir: "{{ download_dir }}/{{ nrpesrc }}"
     creates: "{{ nrpe_init }}"
   notify: restart nrpe
-
-- name: Ensure plugins directory is present
-  file:
-    path: "{{ plugins_dir }}"
-    state: directory
-
-- name: Copy check_nrpe
-  copy:
-    src: "{{ download_dir }}/{{ nrpesrc }}/src/check_nrpe"
-    dest: "{{ plugins_dir }}/check_nrpe"
-    remote_src: yes
 
 - name: Reload Systemd
   systemd:
@@ -78,7 +73,8 @@
 - name: Reload Upstart
   command: initctl reload-configuration
   changed_when: False
-  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 15
+  when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6") or
+        (ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 15)
 
 - name: Enable NRPE on boot
   service:

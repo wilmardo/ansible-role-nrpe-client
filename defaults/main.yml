@@ -9,5 +9,6 @@ nrpe_version: 3.2.1
 nrpeurl: "https://github.com/NagiosEnterprises/nrpe/archive/nrpe-{{ nrpe_version }}.tar.gz"
 nrpesrc: "nrpe-nrpe-{{ nrpe_version }}"
 
-# Location of monitoring plugins
-plugins_dir: /usr/local/nagios/libexec
+# User which daemon runs as
+nrpe_user: nagios
+nrpe_group: nagios
