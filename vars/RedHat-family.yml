@@ -6,6 +6,7 @@ nrpe_prerequisites:
   - gcc
   - glibc
   - glibc-common
+  - openssl
   - openssl-devel
   - perl
   - make
