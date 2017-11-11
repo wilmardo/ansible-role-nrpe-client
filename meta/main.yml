@@ -15,14 +15,15 @@ galaxy_info:
 
   - name: Ubuntu
     versions:
-    - trusty
     - xenial
+    - trusty
+    - precise
 
   - name: Debian
     versions:
-    - wheezy
-    - jessie
     - stretch
+    - jessie
+    - wheezy
 
   galaxy_tags:
     - monitoring
