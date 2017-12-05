@@ -13,7 +13,7 @@ None.
 
 ### Default usage
 
-For default usage of this role you only need to define the following:
+For default usage of this role you only need to define the following, for more advanced usage look at the [Advanced usage](#advanced-usage) section:
 ```yaml
 # Sets the hosts allowed to connect to NRPE
 nrpe_allowed_hosts:
