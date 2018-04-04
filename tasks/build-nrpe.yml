@@ -14,7 +14,7 @@
   unarchive:
     src: "{{ download_dir }}/{{ nrpesrc }}.tar.gz"
     dest: "{{ download_dir }}/"
-    remote_src: yes
+    remote_src: true
 
 - name: Configure NRPE
   command: ./configure  --enable-command-args
@@ -57,23 +57,23 @@
 - name: Reload Systemd
   systemd:
     name: nrpe
-    daemon_reload: yes
+    daemon_reload: true
   when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7") or
         (ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int >= 15) or
         (ansible_distribution == "Debian" and ansible_distribution_major_version|int >= 8)
 
 - name: Reload SysVinit
   command: update-rc.d nrpe defaults
-  changed_when: False
+  changed_when: false
   when: ansible_distribution == "Debian" and ansible_distribution_major_version|int < 8
 
 - name: Reload Upstart
   command: initctl reload-configuration
-  changed_when: False
+  changed_when: false
   when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6") or
         (ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 15)
 
 - name: Enable NRPE on boot
   service:
     name: nrpe
-    enabled: yes
+    enabled: true

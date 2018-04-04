@@ -1,2 +1,2 @@
 ---
-nrpe_init: /usr/lib/systemd/system/nrpe.service # Systemd
+nrpe_init: /usr/lib/systemd/system/nrpe.service  # Systemd
