@@ -1,2 +1,0 @@
----
-nrpe_init: /etc/init.d/nrpe  # Sysvinit

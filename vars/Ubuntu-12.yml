@@ -1,2 +1,0 @@
----
-nrpe_init: /etc/init/nrpe.conf  # Upstart

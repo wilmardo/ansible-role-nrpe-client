@@ -2,26 +2,20 @@
 
 - name: Install NRPE prerequisites with apt
   apt:
-    name: "{{ item }}"
+    name: "{{ nrpe_prerequisites }}"
     state: present
     update_cache: true
-  with_items: "{{ nrpe_prerequisites }}"
   when: ansible_os_family == "Debian"
 
-- block:
+- name: Install NRPE prerequisites with yum
+  yum:
+    name: "{{ nrpe_prerequisites }}"
+    state: present
+    update_cache: true
+  when: ansible_distribution == "CentOS"
 
-    - name: Install NRPE prerequisites with yum
-      yum:
-        name: "{{ item }}"
-        state: present
-        update_cache: true
-      with_items: "{{ nrpe_prerequisites }}"
-
-    - name: Install Ansible prerequisites for RHEL
-      yum:
-        name: "{{ item }}"
-        state: present
-      with_items:
-        - libselinux-python
-
-  when: ansible_os_family == "RedHat"
+- name: Install NRPE prerequisites with dnf
+  dnf:
+    name: "{{ nrpe_prerequisites }}"
+    state: present
+  when: ansible_distribution == "Fedora"

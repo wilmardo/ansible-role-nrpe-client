@@ -1,2 +1,0 @@
----
-nrpe_init: /lib/systemd/system/nrpe.service  # Systemd

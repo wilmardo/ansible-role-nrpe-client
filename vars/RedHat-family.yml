@@ -10,3 +10,5 @@ nrpe_prerequisites:
   - openssl-devel
   - perl
   - make
+
+nrpe_init: /usr/lib/systemd/system/nrpe.service  # Systemd
