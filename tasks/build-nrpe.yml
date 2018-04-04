@@ -60,12 +60,8 @@
     daemon_reload: true
   when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7") or
         (ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int >= 15) or
-        (ansible_distribution == "Debian" and ansible_distribution_major_version|int >= 8)
-
-- name: Reload SysVinit
-  command: update-rc.d nrpe defaults
-  changed_when: false
-  when: ansible_distribution == "Debian" and ansible_distribution_major_version|int < 8
+        (ansible_distribution == "Debian" and ansible_distribution_major_version|int >= 8) or
+        (ansible_distribution == "Fedora")
 
 - name: Reload Upstart
   command: initctl reload-configuration
