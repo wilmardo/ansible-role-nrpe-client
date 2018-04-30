@@ -17,7 +17,7 @@ platforms:
     image: lansible/centos:7
 
   - name: CentOS6
-    image: lansible/centos:6
+    image: centos:6
 
   - name: Debian9
     image: lansible/debian:9
