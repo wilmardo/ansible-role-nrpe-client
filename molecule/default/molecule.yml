@@ -10,32 +10,32 @@ driver:
 lint:
   name: yamllint
   options:
-    config-file: molecule/_rules/.yamllint
+    config-file: ${DEV_MOLECULE_RULES}/yaml-lint.yml
 
 platforms:
-  - name: CentOS7
+  - name: NRPE-Client-CentOS7
     image: lansible/centos:7
 
-  - name: CentOS6
-    image: centos:6
+  - name: NRPE-Client-CentOS6
+    image: lansible/centos:6
 
-  - name: Debian9
+  - name: NRPE-Client-Debian9
     image: lansible/debian:9
 
-  - name: Debian8
+  - name: NRPE-Client-Debian8
     image: lansible/debian:8
 
-  - name: Fedora27
+  - name: NRPE-Client-Fedora27
     image: lansible/fedora:27
 
-  - name: Fedora26
+  - name: NRPE-Client-Fedora26
     image: lansible/fedora:26
 
-  - name: Ubuntu1604
+  - name: NRPE-Client-Ubuntu1604
     image: lansible/ubuntu:16.04
 
-  - name: Ubuntu1404
-    image: lansible/ubuntu:16.04
+  - name: NRPE-Client-Ubuntu1404
+    image: lansible/ubuntu:14.04
 
 provisioner:
   name: ansible
@@ -47,11 +47,7 @@ provisioner:
   lint:
     name: ansible-lint
     options:
-      c: molecule/_rules/.ansible-lint
+      c: ${DEV_MOLECULE_RULES}/ansible-lint.yml
 
 scenario:
   name: default
-
-verifier:
-  name: goss
-  enabled: false
