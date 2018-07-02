@@ -16,8 +16,8 @@ platforms:
   - name: NRPE-Client-CentOS7
     image: lansible/centos:7
 
-  - name: NRPE-Client-CentOS6
-    image: lansible/centos:6
+#  - name: NRPE-Client-CentOS6
+#    image: lansible/centos:6
 
   - name: NRPE-Client-Debian9
     image: lansible/debian:9
@@ -25,11 +25,14 @@ platforms:
   - name: NRPE-Client-Debian8
     image: lansible/debian:8
 
-  - name: NRPE-Client-Fedora27
-    image: lansible/fedora:27
-
-  - name: NRPE-Client-Fedora26
-    image: lansible/fedora:26
+#  - name: NRPE-Client-Fedora27
+#    image: lansible/fedora:27
+#
+#  - name: NRPE-Client-Fedora26
+#    image: lansible/fedora:26
+#
+#  - name: NRPE-Client-Fedora25
+#    image: lansible/fedora:25
 
   - name: NRPE-Client-Ubuntu1604
     image: lansible/ubuntu:16.04

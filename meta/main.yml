@@ -12,7 +12,7 @@ galaxy_info:
     - name: EL
       versions:
         - 7
-        - 6
+#        - 6
 
     - name: Ubuntu
       versions:
@@ -28,6 +28,8 @@ galaxy_info:
     - monitoring
     - nagios
     - nrpe
+    - nrpe-client
     - nagiosplugins
+    - system
 
 dependencies: []
